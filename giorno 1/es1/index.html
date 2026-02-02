@@ -1,46 +1,200 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ciao a tutti</title>
-    <style>
-        body{
-            font-family: Arial, Helvetica, sans-serif;
-        }
-        p {
-            color: brown;
-            background-color: aqua;
-        }
-        h1 {
-            color: blueviolet;
-        a {
-            transition: all 3%;
-            padding-left: 0%;
-        }
+    <title>Portfolio Sara Riccio</title>
     
-        }
-        a:hover{
-            background-color: chocolate;
-            padding-left: 50%;
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- CSS STYLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
+        body {
+            /* Sfondo gradiente dal bianco (#ffffff) al grigio (#b0b0b0) */
+            background: linear-gradient(180deg, #ffffff 0%, #353434 100%);
+            height: 100vh; /* Occupa tutta l'altezza dello schermo */
+            font-family: 'Arial', sans-serif;
+            overflow: hidden; /* Evita scorrimento inutile se il contenuto sta in una schermata */
+            position: relative; /* Necessario per posizionare gli elementi in assoluto */
+        }
+
+        /* BARRA DI NAVIGAZIONE (In alto a destra o centro) */
+        nav {
+            position: absolute;
+            top: 30px;
+            right: 50px; /* Posizionata a destra per bilanciare il design */
+            z-index: 10;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-family: 'Arial', sans-serif;
+            font-size: 1rem;
+            margin-left: 30px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        /* CONTENUTO CENTRALE (Titolo e Sottotitolo) */
+        .center-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -250%); /* Centratura perfetta */
+            text-align: center;
+            width: 100%;
+        }
+
+        .main-title {
+            /* Simulo font Aprila Bold usando Montserrat ExtraBold */
+            font-family: 'Montserrat', sans-serif; 
+            font-weight: 800; 
+            font-size: 6rem; /* Molto grande */
+            color: #222;
+            letter-spacing: -2px;
+            line-height: 1;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            font-family: 'Arial', sans-serif;
+            font-weight: 400; /* Regular */
+            font-size: 1.5rem;
+            color: #444;
+            letter-spacing: 4px; /* Spaziato per eleganza */
+            text-transform: uppercase;
+        }
+
+        /* PULSANTI PROGETTI (Sinistra, uno sotto l'altro) */
+        .project-menu {
+            position: absolute;
+            top: 50%;
+            left: 50px; /* Allineati a sinistra */
+            transform: translatez(-10%); /* Centrati verticalmente rispetto al lato */
+            display: flex;
+            flex-direction: column; /* Uno sotto l'altro */
+            gap: 20px;
+            
+
+    
+        }
+
+        .btn-project {
+            text-decoration: none;
+            color: #333;
+            font-family: 'Arial', sans-serif;
+            font-size: 1.1rem;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-left: 3px solid transparent; /* Linea decorativa invisibile inizialmente */
+            transition: all 0.3s ease;
+        }
+
+        .btn-project:hover {
+            border-left: 3px solid #858181; /* Appare la linea al passaggio del mouse */
+            padding-left: 20px; /* Sposta leggermente a destra */
+            color: #858181;
+        }
+
+        /* CONTATTI (Basso a sinistra) */
+        .footer-contacts {
+            position: absolute;
+            bottom: 30px;
+            left: 50px;
+            font-family: 'Arial', sans-serif;
+            font-size: 0.9rem;
+            color: #8d8a8a;
+        }
+
+        .footer-contacts p {
+            margin-bottom: 5px;
+        }
+
+        .footer-contacts a {
+            color: #8d8a8a;
+            text-decoration: none;
+            font-weight: regular;
+        }
+
+        .footer-contacts a:hover {
+            text-decoration: underline;
+        }
+
+        /* RESPONSIVE (Per cellulari) */
+        @media (max-width: 768px) {
+            .main-title { font-size: 3rem; }
+            .subtitle { font-size: 1rem; }
+            
+            /* Su mobile spostiamo tutto al centro per leggibilità */
+            .project-menu {
+                position: relative;
+                top: auto; left: auto; transform: none;
+                align-items: center;
+                margin-top: 40px;
+            }
+            .center-content {
+                position: relative;
+                top: auto; left: auto; transform: none;
+                margin-top: 100px;
+            }
+            .footer-contacts {
+                position: relative;
+                bottom: auto; left: auto;
+                text-align: center;
+                margin-top: 50px;
+                padding-bottom: 20px;
+            }
+            nav {
+                width: 100%;
+                text-align: center;
+                right: 0;
+            }
+            body {
+                overflow-y: auto; /* Abilita lo scroll su mobile */
+                height: auto;
+                text-align: center;
+            }
+        }
     </style>
 </head>
 <body>
-<h1>Lorem ipsum</h1>
-<p>
-    I miei links:<br>
-   <a target="_blank href=https://g.petango.com/photos/2416/1c558fed-b063-475e-b63d-a62138ac1e7f.jpg">IG</a><br>
 
-</p>
+    <nav>
+        <a href="#about">About Me</a>
+        <a href="#works">I Miei Lavori</a>
+    </nav>
 
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <br>
-    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<br>
-    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.<br>
-    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-</p>
+    <div class="center-content">
+        <h1 class="main-title">PORTFOLIO</h1>
+        <h2 class="subtitle">Sara Riccio</h2>
+    </div>
 
-<img src="https://g.petango.com/photos/2416/1c558fed-b063-475e-b63d-a62138ac1e7f.jpg">
+    <div class="project-menu">
+        <a href="#progetto1" class="btn-project">Progetto 1</a><a href=" https://saariccio.github.io/ilmiosito/"></a>
+        <a href="#progetto2" class="btn-project">Progetto 2</a><a href=" https://saariccio.github.io/ilmiosito/"></a>
+        <a href="#progetto3" class="btn-project">Progetto 3</a><a href=" https://saariccio.github.io/ilmiosito/"></a>
+        <a href="#progetto4" class="btn-project">Progetto 4</a><a href=" https://saariccio.github.io/ilmiosito/"></a>
+    </div>
+
+    <div class="footer-contacts">
+        <p>Email: <a href="mailto:email@esempio.com">saaricc15@gmail.com</a></p>
+        <p>Instagram: <a href="https://instagram.com" target="_blank">@sara.riccio</a></p>
+    </div>
+
 </body>
 </html>
