@@ -1,0 +1,72 @@
+<style>
+    /* RESET */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #ffffff, #9c9c9c);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: #333;
+    }
+
+    /* TITOLI */
+    h1 {
+      font-size: 56px;
+      letter-spacing: 5px;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: 22px;
+      font-weight: normal;
+      margin-bottom: 50px;
+    }
+
+    /* CONTAINER BOTTONI */
+    .buttons {
+      display: flex;
+      gap: 20px;
+    }
+
+    /* BOTTONI */
+    .btn {
+      padding: 15px 30px;
+      border: 1px solid #333;
+      background: transparent;
+      text-decoration: none;
+      color: #333;
+      font-size: 14px;
+      letter-spacing: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      background: #333;
+      color: #fff;
+      transform: translateY(-5px);
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>PORTFOLIO</h1>
+  <h2>Sara Riccio</h2>
+
+  <div class="buttons">
+    <a href="#" class="btn">Progetto 1</a>
+    <a href="#" class="btn">Progetto 2</a>
+    <a href="#" class="btn">Progetto 3</a>
+    <a href="#" class="btn">Progetto 4</a>
+  </div>
+
+</body>
+</html>
