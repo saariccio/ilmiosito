@@ -9,25 +9,17 @@
 <body>
 
     <script>
-        function setup() {
-            createCanvas(700, 400);
-            background(200, 200, 200)
-            
-        }
-        function draw(){
+function setup() {
+  let start = millis(); // store the time before the code block.
+  // Do the stuff that you want to time
+  random(0, 100);
 
-            noStroke()
-
-            if (frameCount % 2 === 0) {
-                fill(0);
-            } else {
-                fill(mouseX, mouseY, 130);
-                let diametro = mouseY
-            }
-
-            ellipse(mouseX, mouseY, 100, 100)
-            ellipse(width-mouseX , mouseY, 100, 100)
-        }
+  // store the time after the code block
+  let end = millis();
+  let elapsed = end - start;
+  console.log(`This took: ${elapsed} ms.`); // print the difference or time elapsed.
+}
+        
     </script>
 </body>
 </html>
