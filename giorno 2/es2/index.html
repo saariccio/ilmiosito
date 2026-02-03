@@ -9,30 +9,49 @@
 <body>
 
     <script>
+
+        let faccione 
+        function preload () {
+            faccione = loadImage("cat.jpg")
+        }
         function setup() {
-            createCanvas(512, 384);
+            createCanvas(800, 600);
+            if (faccione) {
+                faccione.resize(faccione.width / 7, faccione.height / 7);
+            }
         }
 
         function draw() {
             background(0);
+            if (!faccione) return;
             noStroke()
 
-            let numH = 30
-            let numV = 30
-            let d = 12
+            
+			let numH = faccione.width
+			let numV = faccione.height
+			let d = 8
+			let ox = (width - (numH - 1) * d) / 2
+			let oy = (height - (numV - 1) * d) / 2
 
-            let ox =(width - (numH - 1) * d) / 2
-            let oy = (height - (numV - 1) * d / 2) / 2
+			let amount = mouseX * 0.3
 
-            for(let i=0; i<20; i++) {
-                for(let j=0; j<20; j++) {
-                    fill(i * 10, j * 10, 255-i * 10)
-                    let px = 110 + i * 13
-                    let py = 110 + j * 13
-                    circle(px, py, 6)
+			let ny = frameCount * 0.011
+			let nx = frameCount * 0.031
+			let nz = frameCount * 0.014
+
+			for (let j=0; j<numV; j++) {
+				for(let i=0; i<numH; i++) {
+					let col = faccione.get(i, j)
+					let al = alpha(col)
+					if (al < 250) continue
+					let br = brightness(col)
+					fill(255)
+					let px = ox + i * d + map(noise( i * 0.02 + nx, j * 0.02 + ny, nz), 0, 1, -amount, amount)
+					let py = oy + j * d + map(noise( i * 0.02 + nx, j * 0.02 + ny, nz + 5), 0, 1, -amount, amount)
+					circle(px, py, br * 0.1)
                 }
             }
-            
+            image(faccione, 0, 0)
         }
     </script>
 </body>
