@@ -1,33 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="https://cdn.jsdelivr.net/npm/p5@latest/lib/p5.min.js"></script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		body {
+			background-color: gray;
+		}
+	</style>
 </head>
 <body>
+	<script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+	<script>
 
-    <script>
-
-  let faccione
+		let faccione
 
 		function preload() {
-			faccione = loadImage('caat.png')
+			faccione = loadImage('sr.png')
 		}
 
 		function setup() {
 			// creiamo un elemento canvas
 			createCanvas(800, 600)
-			if (faccione) {
-				faccione.resize(faccione.width / 7, faccione.height / 7)
-			}
+			faccione.resize(faccione.width / 7, faccione.height / 7)
+			faccione.loadPixels()
 		}
 
 		function draw(){
 			// sfondo nero
 			background(0)
-			if (!faccione) return
 			noStroke()
 
 			let numH = faccione.width
@@ -44,19 +46,24 @@
 
 			for (let j=0; j<numV; j++) {
 				for(let i=0; i<numH; i++) {
-					let col = faccione.get(i, j)
-					let al = alpha(col)
-					if (al < 250) continue
-					let br = brightness(col)
+					let index = (i + j * numH) * 4
+					let r = faccione.pixels[index]
+					let g = faccione.pixels[index + 1]
+					let b = faccione.pixels[index + 2]
+					let a = faccione.pixels[index + 3]
+
+					if (a < 250) continue
+					let br = Math.max(r, g, b) / 255 * 100
 					fill(255)
 					let px = ox + i * d + map(noise( i * 0.02 + nx, j * 0.02 + ny, nz), 0, 1, -amount, amount)
-					let py = oy + j * d + map(noise( i * 0.02 + nx, j * 0.02 + ny, nz + 5), 0, 1, -amount, amount)
+					let py = oy + j * d + map(noise( i * 0.02 + nx, j * 0.02 + ny, nz + 3), 0, 1, -amount, amount)
 					circle(px, py, br * 0.1)
 				}
 			}
 
 			image(faccione, 0, 0)
-        }
-    </script>
+
+		}
+	</script>
 </body>
 </html>
