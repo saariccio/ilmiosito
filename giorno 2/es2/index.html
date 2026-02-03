@@ -11,14 +11,28 @@
     <script>
         function setup() {
             createCanvas(512, 384);
-            
-        function draw(){
-            backgound(0)
-
-            noStroke()
-            circle(10, 10, 6)
         }
-       
+
+        function draw() {
+            background(0);
+            noStroke()
+
+            let numH = 30
+            let numV = 30
+            let d = 12
+
+            let ox =(width - (numH - 1) * d) / 2
+            let oy = (height - (numV - 1) * d / 2) / 2
+
+            for(let i=0; i<20; i++) {
+                for(let j=0; j<20; j++) {
+                    fill(i * 10, j * 10, 255-i * 10)
+                    let px = 110 + i * 13
+                    let py = 110 + j * 13
+                    circle(px, py, 6)
+                }
+            }
+            
         }
     </script>
 </body>
