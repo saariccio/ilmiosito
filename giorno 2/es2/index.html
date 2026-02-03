@@ -10,23 +10,15 @@
 
     <script>
         function setup() {
-            createCanvas(700, 400);
-            background(200, 200, 200)
+            createCanvas(512, 384);
             
-        }
         function draw(){
+            backgound(0)
 
             noStroke()
-
-            if (frameCount % 2 === 0) {
-                fill(0);
-            } else {
-                fill(mouseX, mouseY, 130);
-                let diametro = mouseY
-            }
-
-            ellipse(mouseX, mouseY, 100, 100)
-            ellipse(width-mouseX , mouseY, 100, 100)
+            circle(10, 10, 6)
+        }
+       
         }
     </script>
 </body>
