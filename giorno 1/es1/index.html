@@ -63,7 +63,7 @@
         /* CONTENUTO CENTRALE (Titolo e Sottotitolo) */
         .center-content {
             position: absolute;
-            top: 9%;
+            top: 5%;
             left: 50px;
             transform: translateY(0);
             text-align: left;
@@ -75,7 +75,7 @@
             font-family: 'Montserrat', sans-serif; 
             font-weight: 800; 
             font-size: 6rem; /* Molto grande */
-            color: #ffffff31; /* Titolo bianco */
+            color: #ffffff; /* Titolo bianco */
             letter-spacing: -2px;
             line-height: 1;
             margin-bottom: 10px;
@@ -128,7 +128,7 @@
 
         .btn-project {
             text-decoration: none;
-            color: #ccc; /* Link chiari */
+            color: #fff; /* Link bianchi */
             font-family: 'Arial', sans-serif;
             font-size: 1.1rem;
             font-weight: bold;
@@ -183,10 +183,11 @@
 
     <div class="project-menu">
 
-        <a href="https://saariccio.github.io/ilmiosito/giorno 1/es1/index.html">Progetto 1 </a></p>
-        <a href="https://saariccio.github.io/ilmiosito/giorno 2/es2/index.html">Progetto 2 </a></p>
-        <a href="https://saariccio.github.io/ilmiosito/giorno3/es2/index.html">Progetto 3 </a></p>
-        <a href="https://saariccio.github.io/ilmiosito/">Progetto 4 </a></p>
+        <a class="btn-project" href="https://saariccio.github.io/ilmiosito/giorno 1/es1/index.html">Progetto 1 </a>
+        <a class="btn-project" href="https://saariccio.github.io/ilmiosito/giorno 2/es2/index.html">Progetto 2 </a>
+        <a class="btn-project" href="https://saariccio.github.io/ilmiosito/giorno3/es2/index.html">Progetto 3 </a>
+        <a class="btn-project" href="https://saariccio.github.io/ilmiosito/">Progetto 4 </a>
+        <a class="btn-project" href="https://saariccio.github.io/ilmiosito/">Progetto 5 </a>
     </div>
     <div class="footer-contacts">
         <p>Email: <a href="mailto:email@esempio.com">saaricc15@gmail.com</a></p>
@@ -203,24 +204,57 @@
         // The angle button will calculate the angle at which each section is rotated.
         let angle = 360 / symmetry;
         let currentHue = 0;
+        
+        // Variabili per la Griglia (Noise Grid)
+        let xScale = 0.015;
+        let yScale = 0.03;
+        let offsetSlider;
+        let gap = 9; // Dimensione fissa minima per la griglia
+        let offset;
 
         function setup() {
             describe(
-                `Dark grey canvas that reflects the lines drawn within it in ${symmetry} sections.`
+                `Canvas interattivo con disegno simmetrico in ${symmetry} sezioni e sfondo a griglia di rumore.`
             );
             // Create canvas that fills the window
             let cnv = createCanvas(windowWidth, windowHeight);
             angleMode(DEGREES);
-            colorMode(HSB, 360, 100, 100);
+            colorMode(HSB, 360, 100, 100, 100);
             background(0);
+            
+            // Setup Sliders per la griglia (Posizionati in basso a destra)
+            offsetSlider = createSlider(0, 1000, 0);
+            offsetSlider.position(windowWidth - 180, windowHeight - 50);
+            offsetSlider.style('width', '150px');
+
+            // Eventi: ridisegna lo sfondo se gli slider vengono mossi
+            offsetSlider.input(() => background(0));
+
+            // Disegna la griglia iniziale
+            // Non serve chiamare dotGrid qui, draw() lo farà automaticamente
         }
 
         function windowResized() {
             resizeCanvas(windowWidth, windowHeight);
+            
+            // Evita errori se gli slider non sono ancora stati creati
+            if (!offsetSlider) return;
+
+            // Riposiziona gli slider quando si ridimensiona la finestra
+            offsetSlider.position(windowWidth - 180, windowHeight - 50);
+            
             background(0);
         }
 
         function draw() {
+            // Effetto scia: disegna un rettangolo semitrasparente su tutto lo schermo
+            noStroke();
+            fill(0, 0, 0, 5); // Alpha 5/100 per una scia lunga
+            rect(0, 0, width, height);
+
+            // Disegna la griglia sopra la scia (così rimane nitida)
+            drawGrid();
+
             // Move the 0,0 coordinates of the canvas to the center
             translate(width / 2, height / 2);
 
@@ -239,21 +273,41 @@
                         instr.style.display = 'none';
                     }
 
-                    stroke(currentHue, 90, 100);
+                    // Calcola il diametro basato sul rumore per integrare l'effetto griglia
+                    // Usa le coordinate globali del mouse per coerenza con lo sfondo
+                    let noiseValue = noise((mouseX + offset) * xScale, (mouseY + offset) * yScale);
+                    let diameter = noiseValue * gap;
+
+                    noStroke();
+                    fill(currentHue, 90, 100);
                     currentHue = (currentHue + 2) % 360;
 
                     for (let i = 0; i < symmetry; i++) {
                         rotate(angle);
-                        stroke(255);
-                        strokeWeight(3);
-                        line(lineStartX, lineStartY, lineEndX, lineEndY);
+                        circle(lineStartX, lineStartY, diameter);
 
                         // ... and reflect the line within the symmetry sections as well.
                         push();
                         scale(1, -1);
-                        line(lineStartX, lineStartY, lineEndX, lineEndY);
+                        circle(lineStartX, lineStartY, diameter);
                         pop();
                     }
+                }
+            }
+        }
+
+        // Funzione per disegnare solo i punti della griglia
+        function drawGrid() {
+            noStroke();
+            fill(0, 0, 30); // Grigio scuro (Brightness 30%) per i punti
+
+            offset = offsetSlider.value();
+
+            for (let x = gap / 2; x < width; x += gap) {
+                for (let y = gap / 2; y < height; y += gap) {
+                    let noiseValue = noise((x + offset) * xScale, (y + offset) * yScale);
+                    let diameter = noiseValue * gap;
+                    circle(x, y, diameter);
                 }
             }
         }
