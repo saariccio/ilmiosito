@@ -26,6 +26,8 @@
 			// creiamo un elemento canvas
 			createCanvas(windowWidth, windowHeight)
 			faccione.resize(faccione.width / 7, faccione.height / 7)
+
+			
 			faccione.loadPixels()
 		}
 		
@@ -40,7 +42,7 @@
 			let ox = (width - (numH - 1) * d) / 2
 			let oy = (height - (numV - 1) * d) / 2
 
-			let amount = mouseX * 0.3
+			let amount = mouseX * 0.1
 
 			let ny = frameCount * 0.011
 			let nx = frameCount * 0.031
@@ -56,14 +58,12 @@
 
 					if (a < 250) continue
 					let br = Math.max(r, g, b) / 255 * 100
-					fill(255)
+					fill(map(mouseX, 0, width, 50, 255), map(mouseY, 0, height, 50, 255), 200)
 					let px = ox + i * d + map(noise( i * 0.02 + nx, j * 0.02 + ny, nz), 0, 1, -amount, amount)
 					let py = oy + j * d + map(noise( i * 0.02 + nx, j * 0.02 + ny, nz + 3), 0, 1, -amount, amount)
 					circle(px, py, br * 0.1)
 				}
 			}
-
-			image(faccione, 0, 0)
 
 		}
 	</script>
