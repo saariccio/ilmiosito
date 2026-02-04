@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@latest/lib/p5.min.js"></script>
+</head>
+<body>
+
+    <script>
+function setup() {
+  let start = millis(); // store the time before the code block.
+  // Do the stuff that you want to time
+  random(0, 100);
+
+  // store the time after the code block
+  let end = millis();
+  let elapsed = end - start;
+  console.log(`This took: ${elapsed} ms.`); // print the difference or time elapsed.
+}
+        
+    </script>
+</body>
+</html>
