@@ -7,6 +7,9 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap" rel="stylesheet">
 
+    <!-- Libreria p5.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+
     <style>
         /* --- CSS STYLES --- */
         * {
@@ -17,11 +20,19 @@
 
         body {
             /* Sfondo gradiente dal bianco (#ffffff) al grigio (#b0b0b0) */
-            background: linear-gradient(180deg, #ffffff 0%, #353434 100%);
+            /* background: linear-gradient(180deg, #ffffff 0%, #353434 100%); */
+            background-color: #000; /* Sfondo nero per integrare il canvas */
             height: 100vh; /* Occupa tutta l'altezza dello schermo */
             font-family: 'Arial', sans-serif;
             overflow: hidden; /* Evita scorrimento inutile se il contenuto sta in una schermata */
             position: relative; /* Necessario per posizionare gli elementi in assoluto */
+        }
+
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1; /* Posiziona il disegno dietro al testo */
         }
 
         /* BARRA DI NAVIGAZIONE (In alto a destra o centro) */
@@ -34,7 +45,7 @@
 
         nav a {
             text-decoration: none;
-            color: #333;
+            color: #ccc; /* Testo chiaro per sfondo scuro */
             font-family: 'Arial', sans-serif;
             font-size: 1rem;
             margin-left: 30px;
@@ -53,10 +64,10 @@
         .center-content {
             position: absolute;
             top: 50%;
-            left: 50%;
-            transform: translate(-50%, -250%); /* Centratura perfetta */
-            text-align: center;
-            width: 100%;
+            left: 50px;
+            transform: translateY(-250%);
+            text-align: left;
+            width: auto;
         }
 
         .main-title {
@@ -64,7 +75,7 @@
             font-family: 'Montserrat', sans-serif; 
             font-weight: 800; 
             font-size: 6rem; /* Molto grande */
-            color: #222;
+            color: #fff; /* Titolo bianco */
             letter-spacing: -2px;
             line-height: 1;
             margin-bottom: 10px;
@@ -75,7 +86,7 @@
             font-family: 'Arial', sans-serif;
             font-weight: 400; /* Regular */
             font-size: 1.5rem;
-            color: #444;
+            color: #aaa; /* Sottotitolo grigio chiaro */
             letter-spacing: 4px; /* Spaziato per eleganza */
             text-transform: uppercase;
         }
@@ -96,7 +107,7 @@
 
         .btn-project {
             text-decoration: none;
-            color: #333;
+            color: #ccc; /* Link chiari */
             font-family: 'Arial', sans-serif;
             font-size: 1.1rem;
             font-weight: bold;
@@ -108,7 +119,7 @@
         .btn-project:hover {
             border-left: 3px solid hsl(0, 1%, 68%); /* Appare la linea al passaggio del mouse */
             padding-left: 20px; /* Sposta leggermente a destra */
-            color: hsl(0, 1%, 68%);
+            color: #fff; /* Diventa bianco al passaggio */
         }
 
         /* CONTATTI (Basso a sinistra) */
@@ -197,5 +208,58 @@
     </div>
 
     
+    <script>
+        // Define the global variables.
+        // The symmetry variable will define how many reflective sections the canvas
+        // is split into.
+        let symmetry = 6;
+
+        // The angle button will calculate the angle at which each section is rotated.
+        let angle = 360 / symmetry;
+
+        function setup() {
+            describe(
+                `Dark grey canvas that reflects the lines drawn within it in ${symmetry} sections.`
+            );
+            // Create canvas that fills the window
+            let cnv = createCanvas(windowWidth, windowHeight);
+            angleMode(DEGREES);
+            background(0);
+        }
+
+        function windowResized() {
+            resizeCanvas(windowWidth, windowHeight);
+            background(0);
+        }
+
+        function draw() {
+            // Move the 0,0 coordinates of the canvas to the center
+            translate(width / 2, height / 2);
+
+            // If the cursor is within the limits of the canvas...
+            if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height) {
+                let lineStartX = mouseX - width / 2;
+                let lineStartY = mouseY - height / 2;
+                let lineEndX = pmouseX - width / 2;
+                let lineEndY = pmouseY - height / 2;
+
+                // And, if the mouse is pressed while in the canvas...
+                if (mouseIsPressed === true) {
+                    for (let i = 0; i < symmetry; i++) {
+                        rotate(angle);
+                        stroke(255);
+                        strokeWeight(3);
+                        line(lineStartX, lineStartY, lineEndX, lineEndY);
+
+                        // ... and reflect the line within the symmetry sections as well.
+                        push();
+                        scale(1, -1);
+                        line(lineStartX, lineStartY, lineEndX, lineEndY);
+                        pop();
+                    }
+                }
+            }
+        }
+    </script>
 </body>
 </html>
