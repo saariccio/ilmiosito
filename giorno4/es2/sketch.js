@@ -31,7 +31,7 @@ let highScore;
 let fruit;
 
 function setup() {
-  createCanvas(500, 500);
+  createCanvas(800, 800);
 
   // Adjust frame rate to set movement speed
   frameRate(10);
@@ -49,7 +49,7 @@ function setup() {
 }
 
 function draw() {
-  background(0);
+  background(34, 139, 34);
 
   // Set scale so that the game grid fills canvas
   scale(width / gridWidth, height / gridHeight);
@@ -110,18 +110,26 @@ function startGame() {
 }
 
 function showFruit() {
-  stroke(255, 64, 32);
-  point(fruit.x, fruit.y);
+  push();
+  textSize(1);
+  text('🍌', fruit.x + 0.5, fruit.y + 0.5);
+  pop();
 }
 
 function showSegments() {
-  noFill();
-  stroke(96, 255, 64);
-  beginShape();
-  for (let segment of segments) {
-    vertex(segment.x, segment.y);
+  push();
+  textSize(1);
+  noStroke();
+  for (let i = 0; i < segments.length; i++) {
+    let segment = segments[i];
+    if (i === 0) {
+      text('🐵', segment.x + 0.5, segment.y + 0.5);
+    } else {
+      fill(139, 69, 19);
+      circle(segment.x + 0.5, segment.y + 0.5, 0.8);
+    }
   }
-  endShape();
+  pop();
 }
 
 function updateSegments() {
