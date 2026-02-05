@@ -1,8 +1,8 @@
 // The snake moves along a grid, one space at a time
 // The grid is smaller than the canvas, and its dimensions
 //  are stored in these variables
-let gridWidth = 30;
-let gridHeight = 30;
+let gridWidth;
+let gridHeight;
 
 let gameStarted = false;
 
@@ -34,10 +34,15 @@ let fruit;
 let flowers = [];
 
 function setup() {
-  createCanvas(800, 800);
+  createCanvas(windowWidth, windowHeight);
+
+  // Calcola le dimensioni della griglia per mantenere le celle quadrate
+  let cellSize = min(width, height) / 30;
+  gridWidth = floor(width / cellSize);
+  gridHeight = floor(height / cellSize);
 
   // Adjust frame rate to set movement speed
-  frameRate(10);
+  frameRate(8);
 
   textAlign(CENTER, CENTER);
   textSize(2);
@@ -80,12 +85,23 @@ function draw() {
     // Shift over so that snake and fruit are still on screen
     // when their coordinates are 0
     translate(0.5, 0.5);
+    showScore();
     showFruit();
     showSegments();
     updateSegments();
     checkForCollision();
     checkForFruit();
   }
+}
+
+function showScore() {
+  push();
+  translate(-0.5, -0.5);
+  fill(255);
+  textSize(1.2);
+  textAlign(LEFT, TOP);
+  text('Score: ' + score, 1, 1);
+  pop();
 }
 
 function showStartScreen() {
@@ -178,6 +194,15 @@ function updateSegments() {
       head.y = head.y + 1;
       break;
   }
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+
+  // Ricalcola la griglia quando la finestra cambia dimensione
+  let cellSize = min(width, height) / 30;
+  gridWidth = floor(width / cellSize);
+  gridHeight = floor(height / cellSize);
 }
 
 function checkForCollision() {
