@@ -33,6 +33,7 @@
             top: 0;
             left: 0;
             z-index: -1; /* Posiziona il disegno dietro al testo */
+            touch-action: none; /* Migliora l'esperienza su mobile prevenendo lo scroll mentre si disegna */
         }
 
         /* BARRA DI NAVIGAZIONE (In alto a destra o centro) */
@@ -72,11 +73,11 @@
 
         .main-title {
             /* Simulo font Aprila Bold usando Montserrat ExtraBold */
-            font-family: 'Montserrat', sans-serif; 
-            font-weight: 800; 
+            font-family: 'Arial', sans-serif; 
+            font-weight: 400; /* Regular */
             font-size: 6rem; /* Molto grande */
             color: #ffffff; /* Titolo bianco */
-            letter-spacing: -2px;
+            letter-spacing: 2px;
             line-height: 1;
             margin-bottom: 10px;
             text-transform: uppercase;
@@ -165,6 +166,41 @@
 
         .footer-contacts a:hover {
             text-decoration: underline;
+        }
+
+        /* --- RESPONSIVE DESIGN (MOBILE) --- */
+        @media (max-width: 768px) {
+            nav {
+                top: 20px;
+                right: 20px;
+            }
+            nav a {
+                margin-left: 15px;
+                font-size: 0.8rem;
+            }
+
+            .center-content {
+                left: 20px;
+                top: 15%;
+            }
+            .main-title {
+                font-size: 3.5rem;
+            }
+            .subtitle {
+                font-size: 1rem;
+                letter-spacing: 2px;
+            }
+
+            .project-menu {
+                left: 20px;
+                transform: translateY(-50%); /* Assicura il centraggio verticale */
+                gap: 10px;
+            }
+
+            .footer-contacts {
+                left: 20px;
+                bottom: 20px;
+            }
         }
     </style>
 </head>
