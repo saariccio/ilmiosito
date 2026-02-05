@@ -30,6 +30,9 @@ let highScore;
 // in this variable
 let fruit;
 
+// Array per memorizzare i fiori
+let flowers = [];
+
 function setup() {
   createCanvas(800, 800);
 
@@ -43,6 +46,15 @@ function setup() {
   // If no score has been stored, this will be undefined
   highScore = getItem('high score');
 
+  // Genera fiori casuali
+  for (let i = 0; i < 15; i++) {
+    flowers.push({
+      x: floor(random(gridWidth)),
+      y: floor(random(gridHeight)),
+      emoji: random(['🌸', '🌼', '🌻'])
+    });
+  }
+
   describe(
     'A reproduction of the arcade game Snake, in which a snake, represented by a green line on a black background, is controlled by the arrow keys. Users move the snake toward a fruit, represented by a red dot, but the snake must not hit the sides of the window or itself.'
   );
@@ -53,6 +65,15 @@ function draw() {
 
   // Set scale so that the game grid fills canvas
   scale(width / gridWidth, height / gridHeight);
+
+  // Disegna i fiori
+  push();
+  textSize(1);
+  for (let flower of flowers) {
+    text(flower.emoji, flower.x + 0.5, flower.y + 0.5);
+  }
+  pop();
+
   if (gameStarted === false) {
     showStartScreen();
   } else {
