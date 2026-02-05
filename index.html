@@ -61,6 +61,21 @@
             text-decoration: underline;
         }
 
+        /* HAMBURGER MENU */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            transition: all 0.3s ease-in-out;
+            background-color: white;
+        }
+
         /* CONTENUTO CENTRALE (Titolo e Sottotitolo) */
         .center-content {
             position: absolute;
@@ -79,7 +94,7 @@
             color: #ffffff; /* Titolo bianco */
             letter-spacing: 2px;
             line-height: 1;
-            margin-bottom: 10px;
+            margin-bottom: 10px;        
             text-transform: uppercase;
         }
 
@@ -174,8 +189,42 @@
                 top: 20px;
                 right: 20px;
             }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hamburger.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+
+            .hamburger.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            .nav-links {
+                position: absolute;
+                right: 0;
+                top: 50px;
+                background-color: #000;
+                border: 1px solid #fff;
+                padding: 20px;
+                flex-direction: column;
+                width: 200px;
+                display: none;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
             nav a {
-                margin-left: 15px;
+                margin-left: 0;
+                margin-bottom: 15px;
                 font-size: 0.8rem;
             }
 
@@ -207,8 +256,15 @@
 <body>
 
     <nav>
-        <a href="https://saariccio.github.io/ilmiosito/giorno2/es2/index.html">About Me</a>
-        <a href="#works">I Miei Lavori</a>
+        <div class="hamburger" onclick="toggleMenu()">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <div class="nav-links">
+            <a href="https://saariccio.github.io/ilmiosito/giorno2/es2/index.html">About Me</a>
+            <a href="#works">I Miei Lavori</a>
+        </div>
     </nav>
 
     <div class="center-content">
@@ -346,6 +402,13 @@
                     circle(x, y, diameter);
                 }
             }
+        }
+
+        function toggleMenu() {
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
         }
     </script>
 </body>
