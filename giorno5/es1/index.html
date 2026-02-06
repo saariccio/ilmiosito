@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>I Miei Lavori</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -13,22 +14,32 @@
 
         body {
             font-family: Arial, sans-serif;
-            background: #000000;
+            background: transparent;
             min-height: 100vh;
-            padding: 40px 20px;
+            padding: 100px 20px 40px;
+        }
+
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
         }
 
         h1 {
-            text-align: center;
+            text-align: left;
             color: white;
             margin-bottom: 50px;
             font-size: 2.5em;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .container {
             max-width: 1200px;
-            margin: 0 auto;
+            margin: 0;
         }
 
         .lavori-grid {
@@ -38,27 +49,31 @@
         }
 
         .lavoro-box {
-            background: white;
+            display: block;
+            text-decoration: none;
+            background: rgba(30, 30, 30, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 15px;
             padding: 30px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
             cursor: pointer;
         }
 
         .lavoro-box:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.3), 0 0 50px rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
         }
 
         .lavoro-box h2 {
-            color: #667eea;
+            color: #ffffff;
             margin-bottom: 15px;
             font-size: 1.5em;
         }
 
         .lavoro-box p {
-            color: #666;
+            color: #cccccc;
             line-height: 1.6;
             margin-bottom: 15px;
         }
@@ -73,40 +88,95 @@
             margin-right: 8px;
             margin-top: 10px;
         }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px 50px;
+            display: flex;
+            justify-content: flex-end;
+            z-index: 1000;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 40px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
+    <nav>
+        <a href="../../index.html">Home</a>
+        <a href="../../giorno2/es2/index.html">About Me</a>
+    </nav>
     <div class="container">
         <h1>I Miei Lavori</h1>
         <div class="lavori-grid">
-            <div class="lavoro-box">
+            <a href="../../index.html" class="lavoro-box">
                 <h2>Progetto 1</h2>
                 <p>Descrizione del tuo primo lavoro. Puoi aggiungere dettagli su quello che hai realizzato.</p>
-                <span class="tag">HTML</span>
-                <span class="tag">CSS</span>
-            </div>
+        
+            </a>
 
-            <div class="lavoro-box">
+            <a href="../../giorno2/es2/index.html" class="lavoro-box">
                 <h2>Progetto 2</h2>
                 <p>Descrizione del tuo secondo lavoro. Illustra le tecnologie utilizzate e i risultati ottenuti.</p>
-                <span class="tag">JavaScript</span>
-                <span class="tag">React</span>
-            </div>
+               
+            </a>
 
-            <div class="lavoro-box">
+            <a href="../../giorno3/es2/index.html" class="lavoro-box">
                 <h2>Progetto 3</h2>
                 <p>Descrizione del tuo terzo lavoro. Mostra le competenze che hai sviluppato.</p>
-                <span class="tag">Web Design</span>
-                <span class="tag">UI/UX</span>
-            </div>
+                
+            </a>
 
-            <div class="lavoro-box">
+            <a href="../../giorno4/es2/index.html" class="lavoro-box">
                 <h2>Progetto 4</h2>
                 <p>Descrizione del tuo quarto lavoro. Continua ad aggiungere i tuoi migliori progetti.</p>
-                <span class="tag">Python</span>
-                <span class="tag">Database</span>
-            </div>
+                
+            </a>
         </div>
     </div>
+
+    <script>
+        let xScale = 0.015;
+        let yScale = 0.03;
+        let gap = 9;
+        let zOff = 0;
+
+        function setup() {
+            createCanvas(windowWidth, windowHeight);
+            noStroke();
+            fill(50); // Grigio scuro per i punti
+        }
+
+        function windowResized() {
+            resizeCanvas(windowWidth, windowHeight);
+        }
+
+        function draw() {
+            background(0); // Sfondo nero
+            zOff += 0.005;
+
+            for (let x = gap / 2; x < width; x += gap) {
+                for (let y = gap / 2; y < height; y += gap) {
+                    let noiseValue = noise(x * xScale, y * yScale, zOff);
+                    let diameter = noiseValue * gap;
+                    circle(x, y, diameter);
+                }
+            }
+        }
+    </script>
 </body>
 </html>
