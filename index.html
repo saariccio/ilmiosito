@@ -299,9 +299,9 @@
         // Variabili per la Griglia (Noise Grid)
         let xScale = 0.015;
         let yScale = 0.03;
-        let offsetSlider;
         let gap = 9; // Dimensione fissa minima per la griglia
-        let offset;
+        let offset = 0;
+        let zOff = 5; // Variabile per l'animazione (tempo)
 
         function setup() {
             describe(
@@ -312,14 +312,6 @@
             angleMode(DEGREES);
             colorMode(HSB, 360, 100, 100, 100);
             background(0);
-            
-            // Setup Sliders per la griglia (Posizionati in basso a destra)
-            offsetSlider = createSlider(0, 1000, 0);
-            offsetSlider.position(windowWidth - 180, windowHeight - 50);
-            offsetSlider.style('width', '150px');
-
-            // Eventi: ridisegna lo sfondo se gli slider vengono mossi
-            offsetSlider.input(() => background(0));
 
             // Disegna la griglia iniziale
             // Non serve chiamare dotGrid qui, draw() lo farà automaticamente
@@ -328,11 +320,6 @@
         function windowResized() {
             resizeCanvas(windowWidth, windowHeight);
             
-            // Evita errori se gli slider non sono ancora stati creati
-            if (!offsetSlider) return;
-
-            // Riposiziona gli slider quando si ridimensiona la finestra
-            offsetSlider.position(windowWidth - 180, windowHeight - 50);
             
             background(0);
         }
@@ -340,7 +327,7 @@
         function draw() {
             // Effetto scia: disegna un rettangolo semitrasparente su tutto lo schermo
             noStroke();
-            fill(0, 0, 0, 5); // Alpha 5/100 per una scia lunga
+            fill(0, 0, 0, 10); // Alpha 5/100 per una scia lunga
             rect(0, 0, width, height);
 
             // Disegna la griglia sopra la scia (così rimane nitida)
@@ -366,7 +353,7 @@
 
                     // Calcola il diametro basato sul rumore per integrare l'effetto griglia
                     // Usa le coordinate globali del mouse per coerenza con lo sfondo
-                    let noiseValue = noise((mouseX + offset) * xScale, (mouseY + offset) * yScale);
+                    let noiseValue = noise((mouseX + offset) * xScale, (mouseY + offset) * yScale, zOff);
                     let diameter = noiseValue * gap;
 
                     noStroke();
@@ -392,11 +379,11 @@
             noStroke();
             fill(0, 0, 20); // Grigio scuro (Brightness 30%) per i punti
 
-            offset = offsetSlider.value();
+            zOff += 0.005; // Incrementa zOff per creare l'animazione in loop
 
             for (let x = gap / 2; x < width; x += gap) {
                 for (let y = gap / 2; y < height; y += gap) {
-                    let noiseValue = noise((x + offset) * xScale, (y + offset) * yScale);
+                    let noiseValue = noise((x + offset) * xScale, (y + offset) * yScale, zOff);
                     let diameter = noiseValue * gap;
                     circle(x, y, diameter);
                 }
