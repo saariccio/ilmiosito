@@ -5,18 +5,25 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
 	<style>
+		* {
+			box-sizing: border-box;
+		}
 		body {
 			background-color: black;
 			margin: 0;
+			padding: 100px 50px 40px 1500px;
+			font-family: 'Arial', sans-serif;
 			overflow: hidden;
 		}
+		canvas {
+			position: fixed;
+			top: 0;
+			left: 0;
+			z-index: -1;
+		}
 		#bio-box {
-			position: absolute;
-			top: 50%;
-			right: 200px;
-			transform: translateY(-50%);
 			width: 280px;
-			padding: 25px;
+			padding: 0;
 			background-color: rgba(0);
 			border: 1px solid rgba(0);
 			border-radius: 15px;
@@ -25,16 +32,47 @@
 			z-index: 10;
 			line-height: 1.6;
 		}
-		#bio-box h2 {
-			margin-top: 0;
-			font-size: 1.8rem;
+		nav {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			padding: 30px 50px;
+			display: flex;
+			justify-content: flex-end;
+			z-index: 1000;
+		}
+		nav a {
+			color: #ccc;
+			text-decoration: none;
+			margin-left: 40px;
+			font-size: 1rem;
+			font-weight: bold;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+		}
+		nav a:hover {
+			text-decoration: underline;
+		}
+		h1 {
+			text-align: left;
+			color: #ccc;
 			margin-bottom: 10px;
+			font-size: 2.5em;
+			text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+			font-weight: bold;
+			text-transform: uppercase;
+			letter-spacing: 1px;
 		}
 	</style>
 </head>
 <body>
+	<nav>
+		<a href="../../index.html">Home</a>
+		<a href="../../giorno5/es1/index.html">I Miei Lavori</a>
+	</nav>
+	<h1>ABOUT ME</h1>
 	<div id="bio-box">
-		<h2>ABOUT ME</h2>
 		<p>Ciao! Il mio nome è Sara, e questo è il mio sito web personale.</p>
 	</div>
 	<script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
