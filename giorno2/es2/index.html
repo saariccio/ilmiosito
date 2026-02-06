@@ -89,6 +89,25 @@
 		.footer-contacts a:hover {
 			text-decoration: underline;
 		}
+
+		/* Responsive Design per schermi piccoli (tablet e mobile) */
+		@media (max-width: 768px) {
+			body {
+				padding: 100px 20px 40px 20px; /* Riduce il padding laterale */
+			}
+			nav {
+				padding: 20px;
+				justify-content: center; /* Centra la navigazione */
+			}
+			nav a {
+				margin-left: 15px;
+				margin-right: 15px;
+				font-size: 0.9rem;
+			}
+			h1 {
+				font-size: 2em; /* Rimpicciolisce il titolo */
+			}
+		}
 	</style>
 </head>
 <body>
@@ -133,7 +152,13 @@
 
 			let numH = faccione.width
 			let numV = faccione.height
+			
+			// Adatta la dimensione della griglia in base alla larghezza dello schermo
 			let d = 7.3
+			if (width < 768) {
+				d = 4.5 // Punti più vicini su mobile per rimpicciolire l'immagine
+			}
+
 			let ox = (width - (numH - 1) * d) / 2
 			let oy = (height - (numV - 1) * d) / 2
 
