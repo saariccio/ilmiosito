@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I Miei Lavori</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #000000;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .lavori-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .lavoro-box {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .lavoro-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .lavoro-box h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .lavoro-box p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .lavoro-box .tag {
+            display: inline-block;
+            background: #f0f0f0;
+            color: #667eea;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            margin-right: 8px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>I Miei Lavori</h1>
+        <div class="lavori-grid">
+            <div class="lavoro-box">
+                <h2>Progetto 1</h2>
+                <p>Descrizione del tuo primo lavoro. Puoi aggiungere dettagli su quello che hai realizzato.</p>
+                <span class="tag">HTML</span>
+                <span class="tag">CSS</span>
+            </div>
+
+            <div class="lavoro-box">
+                <h2>Progetto 2</h2>
+                <p>Descrizione del tuo secondo lavoro. Illustra le tecnologie utilizzate e i risultati ottenuti.</p>
+                <span class="tag">JavaScript</span>
+                <span class="tag">React</span>
+            </div>
+
+            <div class="lavoro-box">
+                <h2>Progetto 3</h2>
+                <p>Descrizione del tuo terzo lavoro. Mostra le competenze che hai sviluppato.</p>
+                <span class="tag">Web Design</span>
+                <span class="tag">UI/UX</span>
+            </div>
+
+            <div class="lavoro-box">
+                <h2>Progetto 4</h2>
+                <p>Descrizione del tuo quarto lavoro. Continua ad aggiungere i tuoi migliori progetti.</p>
+                <span class="tag">Python</span>
+                <span class="tag">Database</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
