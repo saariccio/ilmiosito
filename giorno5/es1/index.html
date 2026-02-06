@@ -38,13 +38,13 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0;
         }
 
         .lavori-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: 1fr 1fr;
             gap: 30px;
         }
 
@@ -54,7 +54,7 @@
             background: rgba(30, 30, 30, 0.8);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 15px;
-            padding: 30px;
+            padding: 20px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
             cursor: pointer;
@@ -68,7 +68,7 @@
 
         .lavoro-box h2 {
             color: #ffffff;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             font-size: 1.5em;
         }
 
@@ -113,6 +113,12 @@
         nav a:hover {
             text-decoration: underline;
         }
+
+        @media (max-width: 768px) {
+            .lavori-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
@@ -125,25 +131,25 @@
         <div class="lavori-grid">
             <a href="../../index.html" class="lavoro-box">
                 <h2>Progetto 1</h2>
-                <p>Descrizione del tuo primo lavoro. Puoi aggiungere dettagli su quello che hai realizzato.</p>
+                <p>Descrizione del primo lavoro.</p>
         
             </a>
 
             <a href="../../giorno2/es2/index.html" class="lavoro-box">
                 <h2>Progetto 2</h2>
-                <p>Descrizione del tuo secondo lavoro. Illustra le tecnologie utilizzate e i risultati ottenuti.</p>
+                <p>Descrizione del secondo lavoro.</p>
                
             </a>
 
             <a href="../../giorno3/es2/index.html" class="lavoro-box">
                 <h2>Progetto 3</h2>
-                <p>Descrizione del tuo terzo lavoro. Mostra le competenze che hai sviluppato.</p>
+                <p>Descrizione del terzo lavoro.</p>
                 
             </a>
 
             <a href="../../giorno4/es2/index.html" class="lavoro-box">
                 <h2>Progetto 4</h2>
-                <p>Descrizione del tuo quarto lavoro. Continua ad aggiungere i tuoi migliori progetti.</p>
+                <p>Descrizione del quarto lavoro.</p>
                 
             </a>
         </div>
