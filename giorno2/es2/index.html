@@ -35,7 +35,7 @@
 <body>
 	<div id="bio-box">
 		<h2>ABOUT ME</h2>
-		<p>Ciao! Il mio nome è Sara, e questo è il mio sito web personale</p>
+		<p>Ciao! Il mio nome è Sara, e questo è il mio sito web personale.</p>
 	</div>
 	<script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
 	<script>
@@ -76,6 +76,9 @@
 			let nx = frameCount * 0.031
 			let nz = frameCount * 0.014
 
+			// Controlla se il mouse è sopra l'area del "gatto" (la griglia di punti)
+			let isHovering = mouseX > ox && mouseX < ox + numH * d && mouseY > oy && mouseY < oy + numV * d
+
 			for (let j=0; j<numV; j++) {
 				for(let i=0; i<numH; i++) {
 					let index = (i + j * numH) * 4
@@ -90,6 +93,15 @@
 					let px = ox + i * d + map(noise( i * 0.02 + nx, j * 0.02 + ny, nz), 0, 1, -amount, amount)
 					let py = oy + j * d + map(noise( i * 0.02 + nx, j * 0.02 + ny, nz + 3), 0, 1, -amount, amount)
 					circle(px, py, br * 0.06)
+
+					// Se il mouse è sopra, mostra codici casuali che seguono l'animazione
+					if (isHovering && random(1) < 0.002) {
+						fill(0, 255, 70) // Verde Matrix
+						textSize(10)
+						textAlign(CENTER, CENTER)
+						let codes = ['01', 'AF', 'DATA', 'NULL', 'ERROR', '404', 'HEX', 'X']
+						text(random(codes), px, py)
+					}
 				}
 			}
 
