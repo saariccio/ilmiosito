@@ -29,7 +29,7 @@
         h1 {
             text-align: left;
             color: #ccc;
-            margin-bottom: 50px;
+            margin-bottom: 15px;
             font-size: 2.5em;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
             font-weight: bold;
@@ -119,6 +119,56 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        .code-stats {
+            margin-bottom: 40px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: #aaa;
+            line-height: 1.5;
+            letter-spacing: 0;
+        }
+
+        .loading-dots {
+        .loading-bars {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            gap: 6px;
+            z-index: 10;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+        .bar {
+            width: 4px;
+            height: 25px;
+            background-color: #ccc;
+            border-radius: 50%;
+            animation: bounce 1.5s infinite ease-in-out;
+            animation: stretch 1s infinite ease-in-out;
+        }
+
+        .dot:nth-child(1) { animation-delay: 0s; }
+        .dot:nth-child(2) { animation-delay: 0.2s; }
+        .dot:nth-child(3) { animation-delay: 0.4s; }
+        .bar:nth-child(1) { animation-delay: 0s; }
+        .bar:nth-child(2) { animation-delay: 0.1s; }
+        .bar:nth-child(3) { animation-delay: 0.2s; }
+        .bar:nth-child(4) { animation-delay: 0.3s; }
+        .bar:nth-child(5) { animation-delay: 0.4s; }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); opacity: 0.5; }
+            50% { transform: translateY(-10px); opacity: 1; }
+        @keyframes stretch {
+            0%, 100% { transform: scaleY(0.4); }
+            50% { transform: scaleY(1.0); }
+        }
     </style>
 </head>
 <body>
@@ -128,6 +178,8 @@
     </nav>
     <div class="container">
         <h1>I Miei Lavori</h1>
+        <div class="code-stats">
+        </div>
         <div class="lavori-grid">
             <a href="../../index.html" class="lavoro-box">
                 <h2>Progetto 1</h2>
@@ -153,6 +205,18 @@
                 
             </a>
         </div>
+    </div>
+
+    <div class="loading-dots">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+    <div class="loading-bars">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
     </div>
 
     <script>
