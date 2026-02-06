@@ -10,9 +10,33 @@
 			margin: 0;
 			overflow: hidden;
 		}
+		#bio-box {
+			position: absolute;
+			top: 50%;
+			right: 180px;
+			transform: translateY(-50%);
+			width: 280px;
+			padding: 25px;
+			background-color: rgba(0);
+			border: 1px solid rgba(0);
+			border-radius: 15px;
+			color: #f0f0f0;
+			font-family: 'Arial', sans-serif;
+			z-index: 10;
+			line-height: 1.6;
+		}
+		#bio-box h2 {
+			margin-top: 0;
+			font-size: 1.8rem;
+			margin-bottom: 10px;
+		}
 	</style>
 </head>
 <body>
+	<div id="bio-box">
+		<h2>hfwejahdwa</h2>
+		<p>khdwkhdkwhqkL</p>
+	</div>
 	<script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
 	<script>
 
@@ -69,10 +93,6 @@
 				}
 			}
 
-			fill(255)
-			textAlign(CENTER, CENTER)
-			textSize(30)
-			text("hdqJGdejwgja", width / 2, height - 50)
 
 		}
 	</script>
